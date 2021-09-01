@@ -18,5 +18,6 @@ class MainActivity : AppCompatActivity() {
     binding.jump.setOnClickListener {
       startActivity(Intent(this,CouousCameraActivity::class.java))
     }
+
   }
 }
