@@ -19,46 +19,37 @@ package com.helloworld.powerfullcamera
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
-import android.content.BroadcastReceiver
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.hardware.display.DisplayManager
-import android.media.MediaScannerConnection
 import android.net.Uri
-import android.nfc.Tag
 import android.os.*
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
-import android.widget.ProgressBar
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.Camera
-import androidx.camera.core.CameraInfoUnavailableException
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCapture.Metadata
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.window.WindowManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.helloworld.powerfullcamera.databinding.CameraUiContainerBinding
@@ -66,22 +57,16 @@ import com.helloworld.powerfullcamera.databinding.FragmentCameraBinding
 import com.helloworld.powerfullcamera.event.DeleteEvent
 import com.helloworld.powerfullcamera.extension.ANIMATION_FAST_MILLIS
 import com.helloworld.powerfullcamera.extension.ANIMATION_SLOW_MILLIS
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import top.zibin.luban.Luban
-import top.zibin.luban.OnCompressListener
 import java.io.File
-import java.io.Serializable
-import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -166,7 +151,7 @@ class CameraFragment : Fragment() {
 
     displayManager.registerDisplayListener(displayListener, null)
 
-    windowManager = WindowManager(view.context)
+    windowManager = view.context.getSystemService(Service.WINDOW_SERVICE) as WindowManager
 
     outputDirectory = getOutputDirectory(requireContext())
 
@@ -186,7 +171,7 @@ class CameraFragment : Fragment() {
 
   private fun setupList() {
     photoAdapter = TakePhotosListAdapter(photos).apply {
-      setOnItemChildClickListener { adapter, view, position ->
+      setOnItemChildClickListener { _, view, position ->
         when (view.id) {
           R.id.action_delete -> {
             photos[position].delete()
@@ -217,8 +202,7 @@ class CameraFragment : Fragment() {
 
   private fun setUpCamera() {
     val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
-    cameraProviderFuture.addListener({
-
+    cameraProviderFuture.addListener(Runnable {
       cameraProvider = cameraProviderFuture.get()
 
       lensFacing = when {
@@ -233,10 +217,11 @@ class CameraFragment : Fragment() {
 
   private fun bindCameraUseCases() {
 
-    val metrics = windowManager.getCurrentWindowMetrics().bounds
-    Log.d(TAG, "Screen metrics: ${metrics.width()} x ${metrics.height()}")
+    val metrics =  DisplayMetrics()
+    windowManager.defaultDisplay.getRealMetrics(metrics)
+    Log.d(TAG, "Screen metrics: ${metrics.widthPixels} x ${metrics.heightPixels}")
 
-    val screenAspectRatio = aspectRatio(metrics.width(), metrics.height())
+    val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
     Log.d(TAG, "Preview aspect ratio: $screenAspectRatio")
 
     val rotation = fragmentCameraBinding.viewFinder.display.rotation
@@ -281,12 +266,12 @@ class CameraFragment : Fragment() {
   private fun updateCameraUi() {
 
     cameraUiContainerBinding?.root?.let {
-      fragmentCameraBinding.root.removeView(it)
+      (fragmentCameraBinding.root as ViewGroup).removeView(it)
     }
 
     cameraUiContainerBinding = CameraUiContainerBinding.inflate(
       LayoutInflater.from(requireContext()),
-      fragmentCameraBinding.root,
+      fragmentCameraBinding.root as ViewGroup,
       true
     )
 
