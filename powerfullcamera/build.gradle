@@ -13,8 +13,8 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.helloworld.g'
-                artifactId = 'puwerfulcamerma'
-                version = '1.0'
+                artifactId = 'powerfulcamerma'
+                version = '0.7.4.2'
             }
         }
     }
