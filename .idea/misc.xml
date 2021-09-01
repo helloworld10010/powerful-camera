@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Gjj/practice/PowerfulCamera/app/src/main/res/layout/activity_main.xml" value="0.22291666666666668" />
+        <entry key="..\:/Gjj/practice/PowerfulCamera/app/src/main/res/layout/activity_main_sample.xml" value="0.17798913043478262" />
         <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout-land/camera_ui_container.xml" value="0.21770833333333334" />
         <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout-land/fragment_gallery.xml" value="0.284375" />
         <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout-land/item_check_img.xml" value="0.284375" />
@@ -13,6 +14,10 @@
         <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/fragment_gallery.xml" value="0.25" />
         <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/item_check_img.xml" value="0.24728260869565216" />
         <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/item_photo.xml" value="1.5" />
+        <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/power_activity_main.xml" value="0.17798913043478262" />
+        <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/power_camera_ui_container.xml" value="0.17798913043478262" />
+        <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/power_fragment_camera.xml" value="0.18211752786220872" />
+        <entry key="..\:/Gjj/practice/PowerfulCamera/powerfullcamera/src/main/res/layout/power_fragment_gallery.xml" value="0.17798913043478262" />
       </map>
     </option>
   </component>
