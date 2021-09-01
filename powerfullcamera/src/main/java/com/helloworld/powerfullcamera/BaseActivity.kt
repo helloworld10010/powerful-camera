@@ -7,15 +7,15 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
-import com.helloworld.powerfullcamera.databinding.ActivityMainBinding
+import com.helloworld.powerfullcamera.databinding.PowerActivityMainBinding
 
 abstract class BaseActivity : AppCompatActivity() {
 
-  private lateinit var activityMainBinding: ActivityMainBinding
+  private lateinit var activityMainBinding: PowerActivityMainBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+    activityMainBinding = PowerActivityMainBinding.inflate(layoutInflater)
     setContentView(activityMainBinding.root)
 
     supportFragmentManager.beginTransaction()

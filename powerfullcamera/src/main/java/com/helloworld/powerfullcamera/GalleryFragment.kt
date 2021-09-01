@@ -28,7 +28,7 @@ import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.helloworld.powerfullcamera.databinding.FragmentGalleryBinding
+import com.helloworld.powerfullcamera.databinding.PowerFragmentGalleryBinding
 import com.helloworld.powerfullcamera.event.DeleteEvent
 import com.helloworld.powerfullcamera.extension.padWithDisplayCutout
 import org.greenrobot.eventbus.EventBus
@@ -38,7 +38,7 @@ val EXTENSION_WHITELIST = arrayOf("JPG")
 
 class GalleryFragment internal constructor() : Fragment() {
 
-    private var _fragmentGalleryBinding: FragmentGalleryBinding? = null
+    private var _fragmentGalleryBinding: PowerFragmentGalleryBinding? = null
 
     private val fragmentGalleryBinding get() = _fragmentGalleryBinding!!
 
@@ -61,7 +61,7 @@ class GalleryFragment internal constructor() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _fragmentGalleryBinding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _fragmentGalleryBinding = PowerFragmentGalleryBinding.inflate(inflater, container, false)
         return fragmentGalleryBinding.root
     }
 
@@ -122,7 +122,7 @@ class GalleryFragment internal constructor() : Fragment() {
 }
 
 class PicturesLookAdapter(imgPaths:List<File>)
-    : BaseQuickAdapter<File, BaseViewHolder>(R.layout.item_check_img,imgPaths){
+    : BaseQuickAdapter<File, BaseViewHolder>(R.layout.power_item_check_img,imgPaths){
 
     override fun convert(helper: BaseViewHolder, item: File) {
       Glide.with(mContext).load(item).into(helper.getView(R.id.photo_view))

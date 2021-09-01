@@ -52,8 +52,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.helloworld.powerfullcamera.databinding.CameraUiContainerBinding
-import com.helloworld.powerfullcamera.databinding.FragmentCameraBinding
+import com.helloworld.powerfullcamera.databinding.PowerCameraUiContainerBinding
+import com.helloworld.powerfullcamera.databinding.PowerFragmentCameraBinding
 import com.helloworld.powerfullcamera.event.DeleteEvent
 import com.helloworld.powerfullcamera.extension.ANIMATION_FAST_MILLIS
 import com.helloworld.powerfullcamera.extension.ANIMATION_SLOW_MILLIS
@@ -74,11 +74,11 @@ import kotlin.math.min
 @SuppressLint("NotifyDataSetChanged")
 class CameraFragment : Fragment() {
 
-  private var _fragmentCameraBinding: FragmentCameraBinding? = null
+  private var _fragmentCameraBinding: PowerFragmentCameraBinding? = null
 
   private val fragmentCameraBinding get() = _fragmentCameraBinding!!
 
-  private var cameraUiContainerBinding: CameraUiContainerBinding? = null
+  private var cameraUiContainerBinding: PowerCameraUiContainerBinding? = null
 
   private lateinit var outputDirectory: File
   private lateinit var broadcastManager: LocalBroadcastManager
@@ -132,7 +132,7 @@ class CameraFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    _fragmentCameraBinding = FragmentCameraBinding.inflate(inflater, container, false)
+    _fragmentCameraBinding = PowerFragmentCameraBinding.inflate(inflater, container, false)
 
     EventBus.getDefault().register(this)
 
@@ -269,7 +269,7 @@ class CameraFragment : Fragment() {
       (fragmentCameraBinding.root as ViewGroup).removeView(it)
     }
 
-    cameraUiContainerBinding = CameraUiContainerBinding.inflate(
+    cameraUiContainerBinding = PowerCameraUiContainerBinding.inflate(
       LayoutInflater.from(requireContext()),
       fragmentCameraBinding.root as ViewGroup,
       true
@@ -403,7 +403,7 @@ class CameraFragment : Fragment() {
 }
 
 class TakePhotosListAdapter(photos: MutableList<File>) :
-  BaseQuickAdapter<File, BaseViewHolder>(R.layout.item_photo, photos) {
+  BaseQuickAdapter<File, BaseViewHolder>(R.layout.power_item_photo, photos) {
   override fun convert(helper: BaseViewHolder, item: File?) {
     helper.addOnClickListener(R.id.action_delete, R.id.iv_photo)
     Glide.with(helper.itemView)
