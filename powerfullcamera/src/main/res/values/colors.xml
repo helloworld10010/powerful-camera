@@ -15,8 +15,8 @@
   ~ limitations under the License.
   -->
 <resources>
-    <color name="icActive">#FFFFFFFF</color>
-    <color name="icFocused">#DDFFFFFF</color>
-    <color name="icPressed">#AAFFFFFF</color>
-    <color name="transparent">#00000000</color>
+    <color name="powerful_icActive">#FFFFFFFF</color>
+    <color name="powerful_icFocused">#DDFFFFFF</color>
+    <color name="powerful_icPressed">#AAFFFFFF</color>
+    <color name="powerful_transparent">#00000000</color>
 </resources>

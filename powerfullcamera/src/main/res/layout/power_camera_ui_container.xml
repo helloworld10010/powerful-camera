@@ -31,7 +31,7 @@
             android:layout_marginBottom="@dimen/margin_xlarge"
             android:layout_marginEnd="@dimen/margin_small"
             android:padding="@dimen/spacing_large"
-            android:background="@color/transparent"
+            android:background="@color/powerful_transparent"
             android:scaleType="fitCenter"
             app:srcCompat="@mipmap/icon_confirm"
             app:layout_constraintRight_toRightOf="parent"

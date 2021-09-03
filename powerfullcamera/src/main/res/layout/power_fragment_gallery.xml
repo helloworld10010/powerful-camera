@@ -33,7 +33,7 @@
                 android:layout_width="@dimen/round_button_small"
                 android:layout_height="@dimen/round_button_small"
                 android:scaleType="fitCenter"
-                android:background="@android:color/transparent"
+                android:background="@android:color/powerful_transparent"
                 app:srcCompat="@drawable/ic_back" />
 
 
@@ -42,7 +42,7 @@
                 android:layout_width="@dimen/round_button_small"
                 android:layout_height="@dimen/round_button_small"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
+                android:background="@android:color/powerful_transparent"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/back_button"
