@@ -31,14 +31,6 @@ abstract class BaseActivity : AppCompatActivity() {
     },500)
   }
 
-  override fun onBackPressed() {
-    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
-      finishAfterTransition()
-    } else {
-      super.onBackPressed()
-    }
-  }
-
   private fun hideSystemUI() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     WindowInsetsControllerCompat(window, activityMainBinding.fragmentContainer).let { controller ->

@@ -15,6 +15,10 @@
   ~ limitations under the License.
   -->
 <resources>
+    <color name="colorPrimary">#2E82EE</color>
+    <color name="baseColor">#2E82EE</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
     <color name="powerful_icActive">#FFFFFFFF</color>
     <color name="powerful_icFocused">#DDFFFFFF</color>
     <color name="powerful_icPressed">#AAFFFFFF</color>

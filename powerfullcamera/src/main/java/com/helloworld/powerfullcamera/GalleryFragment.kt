@@ -93,7 +93,7 @@ class GalleryFragment internal constructor() : Fragment() {
                 AlertDialog.Builder(view.context, android.R.style.Theme_Material_Dialog)
                         .setMessage(getString(R.string.delete_dialog))
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(R.string.yes) { _, _ ->
+                        .setPositiveButton(R.string.yesyes) { _, _ ->
 
                             // Delete current photo
                             if(mediaFile.delete()){
