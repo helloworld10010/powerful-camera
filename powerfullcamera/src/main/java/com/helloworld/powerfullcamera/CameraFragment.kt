@@ -48,7 +48,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -115,6 +117,49 @@ class CameraFragment : Fragment() {
       }
     } ?: Unit
   }
+
+  var touchHelper: ItemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+    override fun getMovementFlags(
+      recyclerView: RecyclerView,
+      viewHolder: RecyclerView.ViewHolder
+    ): Int {
+      val dragFrlg = ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+      return makeMovementFlags(dragFrlg,0)
+    }
+
+    override fun onMove(
+      recyclerView: RecyclerView,
+      viewHolder: RecyclerView.ViewHolder,
+      target: RecyclerView.ViewHolder
+    ): Boolean {
+      //得到当拖拽的viewHolder的Position
+      val fromPosition = viewHolder.adapterPosition
+      //拿到当前拖拽到的item的viewHolder
+      val toPosition = target.adapterPosition
+      if (fromPosition < toPosition) {
+        for (i in fromPosition until toPosition){
+          Collections.swap(photos, i, i + 1)
+        }
+      } else {
+        for (i in fromPosition downTo toPosition +1){
+          Collections.swap(photos, i, i - 1)
+        }
+      }
+      photoAdapter.notifyItemMoved(fromPosition, toPosition)
+      return true
+    }
+
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+    }
+
+    override fun isLongPressDragEnabled(): Boolean = true
+
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+      super.clearView(recyclerView, viewHolder)
+      photoAdapter.notifyDataSetChanged()
+    }
+
+  })
 
   override fun onDestroyView() {
     _fragmentCameraBinding = null
@@ -191,6 +236,7 @@ class CameraFragment : Fragment() {
       it.adapter = photoAdapter
       it.layoutManager =
         LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+      touchHelper.attachToRecyclerView(it)
     }
   }
 

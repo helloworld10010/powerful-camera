@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.helloworld.powerfullcamera">
     <application>
-        <activity android:name="com.helloworld.powerfullcamera.CouousCameraActivity"/>
-        <activity android:name="com.helloworld.powerfullcamera.GalleryActivity"/>
+        <activity android:name="com.helloworld.powerfullcamera.CouousCameraActivity" android:theme="@style/PowerfulAppTheme"/>
+        <activity android:name="com.helloworld.powerfullcamera.GalleryActivity" android:theme="@style/PowerfulAppTheme"/>
     </application>
 </manifest>

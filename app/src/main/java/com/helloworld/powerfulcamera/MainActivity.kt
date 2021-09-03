@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.helloworld.powerfulcamera.databinding.ActivityMainSampleBinding
-//import com.helloworld.powerfullcamera.CouousCameraActivity
+import com.helloworld.powerfullcamera.CouousCameraActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     binding.jump.setOnClickListener {
-//      startActivity(Intent(this,CouousCameraActivity::class.java))
+      startActivity(Intent(this,CouousCameraActivity::class.java))
     }
 
   }
