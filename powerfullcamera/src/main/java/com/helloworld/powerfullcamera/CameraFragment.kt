@@ -247,6 +247,7 @@ class CameraFragment : Fragment() {
   }
 
   private fun setUpCamera() {
+
     val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
     cameraProviderFuture.addListener(Runnable {
       cameraProvider = cameraProviderFuture.get()
@@ -299,6 +300,28 @@ class CameraFragment : Fragment() {
     } catch (exc: Exception) {
       Log.e(TAG, "Use case binding failed", exc)
     }
+
+    val touch = CameraXPreviewViewTouchListener(requireContext())
+    touch.setCustomTouchListener(object :CameraXPreviewViewTouchListener.CustomTouchListener{
+      override fun zoom(delta: Float) {
+        camera?.cameraInfo?.zoomState.let {
+          Log.i(TAG,"delta:${delta}")
+          Log.i(TAG,"setZoomRatio:${(it?.value?.zoomRatio?:1f) * delta}")
+          camera?.cameraControl?.setZoomRatio((it?.value?.zoomRatio?:1f) * delta)
+        }
+
+      }
+
+      override fun click(x: Float, y: Float) {
+      }
+
+      override fun doubleClick(x: Float, y: Float) {
+      }
+
+      override fun longPress(x: Float, y: Float) {
+      }
+    })
+    fragmentCameraBinding.viewFinder.setOnTouchListener(touch)
   }
 
   private fun aspectRatio(width: Int, height: Int): Int {
